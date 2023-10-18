@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  desc: MyString
+  type: 1
+  no_of_vac: 1
+  pay: 1
+
+two:
+  title: MyString
+  desc: MyString
+  type: 1
+  no_of_vac: 1
+  pay: 1

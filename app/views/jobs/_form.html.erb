@@ -1,0 +1,47 @@
+<%= form_with model: job do |f| %>
+
+    <div class="mb-2">
+        <%= f.label :title %> <br>
+        <%= f.text_field :title, class: "form-control form-control-lg bg-light fs-6", placeholder: "Job Tittle" %>
+    </div>
+    <div class="mb-2">
+        <%= f.label :desc, "Description" %>
+
+        <%= f.text_area :desc, class: "form-control form-control-lg bg-light fs-9", placeholder: "Write Job Description" %> 
+    </div>
+
+    <div class="mb-2">
+        <%= f.label :company_name %> <br>
+        <%= f.text_field :company_name, class: "form-control form-control-lg bg-light fs-6", placeholder: "Company Name" %>
+    </div>
+
+    <div class="mb-2">
+        <%= f.label :location %> <br>
+        <%= f.text_field :location, class: "form-control form-control-lg bg-light fs-6", placeholder: "Location " %>
+    </div>
+
+    <div class="mb-2">
+      <%= f.label :job_type, "Job Type" %>
+      <div>
+      <%= f.radio_button :job_type, "internship",autofocus:true,class:"form-check-input" %>
+      <%= f.label :Internship, "Internship",class:"form-check-label" %>
+      &nbsp;
+      <%= f.radio_button :job_type, "fulltime",autofocus:true,class:"form-check-input" %>
+      <%= f.label :FullTime, "Full Time",class:"form-check-label" %>
+      </div>
+    </div>
+
+    <div class="mb-2">
+      <%= f.label :no_of_vac, "No. of Vacancy" %>
+      <%= f.number_field :no_of_vac, class: "form-control form-control-lg bg-light fs-6", placeholder: "Enter the number " %>
+    </div>
+
+    <div class="mb-2">
+      <%= f.label :pay, "Enter the Pay Value per Annum" %>
+      <%= f.number_field :pay, class: "form-control form-control-lg bg-light fs-6", placeholder: "Enter the package " %>
+    </div>
+
+	<div class="input-group mb-3 mt-2">
+	    <%= f.submit "Post Job", class: "btn btn-lg btn-primary w-100 fs-6" %>
+	</div>
+<% end %>

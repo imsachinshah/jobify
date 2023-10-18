@@ -1,0 +1,106 @@
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<%=javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<style>
+		.indented {
+/*		  padding-left: 50pt;*/
+		  padding-right: 50pt;
+		}
+		.card-subtitle {
+/*		  margin-top: -($card-spacer-y / 2);*/
+		  margin-bottom: 0;
+		}
+		#skillForm{
+			display: none;
+		}
+		.desc {
+			font-family: 'Poppins', sans-serif;
+		}
+	</style>
+
+</head>
+<body>
+	<!-- <main> -->
+		<div class="d-flex m-5 pl-4 justify-content-evenly">
+			<div class="flex-grow-1">
+				<section>
+					<div>
+					  	<% @jobs.each do |j| %>
+							<div class="container mb-5">
+								<div class="card">
+									  <div class="card-header">
+									    <%= j.job_type.to_s.humanize %>
+									  </div>
+									  <div class="card-body">
+									    <h5 class="card-title"><%= j.title %></h5>
+									    <h6 class="card-title"><%= j.company_name %></h6>
+									    <p class="card-subtitle mb-2 text-muted"><i class="material-icons", style="font-size:15px">&#xe55f;</i> <%= j.location %></p>
+									    <pre class="desc card-subtitle"><%= j.desc %></pre>
+									    <div class="container", style="display: flex">				   
+									    	<a href="<%= job_url(j) %>" class="btn btn-primary">View Job</a> &nbsp;
+									    	<a href="<%= edit_job_url(j) %>" class="btn btn-warning">Edit Job</a> &nbsp;
+									    	<%= button_to "Delete Job", job_url(j), data: {confirm: "Are you Sure", "turbo_confirm": "Are you sure?"},  method: :delete, class: "btn btn-danger"  %>
+									    </div>
+									  </div>
+									  <div id="skillForm">
+									  	<%= render "skills/form" %>
+									  </div>
+								  </div>
+							</div>
+						<% end %>
+					</div>
+				</section>
+			</div>
+
+			<div class="flex-shrink-2">
+				<section>
+					<div class="container d-flex justify-content-center align-items-center min-vh-70">
+
+		    			<div class="row border rounded-3 p-3 bg-white">
+
+		    				<div class="col-md justify-content-center">
+		      					<div class="row align-items-center">
+		      						<div class="header-text mb-3">
+							            <h2>Filters Jobs</h2>
+						          	</div>
+									<%= form_with( model: @job, method: :get, class: "form") do |f| %>
+										<div class="mb-2">
+					                        <%= f.label :location %> <br>
+					                        <%= f.text_field :location, class: "form-control form-control-lg bg-light fs-6", placeholder: "Location", value: "#{params[:location]}" %>
+					                    </div>
+
+					                    <div class="mb-2">
+					                      <%= f.label :job_type, "Job Type" %>
+					                      <div>
+					                      <%= f.radio_button :job_type, "internship",autofocus:true,class:"form-check-input", value: "#{params[:job_type]}"  %>
+					                      <%= f.label :Internship, "Internship",class:"form-check-label" %>
+					                      &nbsp;
+					                      <%= f.radio_button :job_type, "fulltime",autofocus:true,class:"form-check-input", value: "#{params[:job_type]}" %>
+					                      <%= f.label :FullTime, "Full Time",class:"form-check-label" %>
+					                      </div>
+					                    </div>
+
+					                    <div class="mb-2">
+									        <%= f.label :company_name %> <br>
+									        <%= f.text_field :company_name, class: "form-control form-control-lg bg-light fs-6", placeholder: "Company Name", value: "#{params[:company_name]}" %>
+									    </div>
+
+										<div class="input-group mb-2 mt-3">	
+											<%= submit_tag "Apply Filters", class: "btn btn-lg btn-success w-100 fs-6"%>
+										</div>
+										<div>
+											<%= button_to "Clear Filters", "/jobs", class: "btn btn-lg btn-danger w-100 fs-6" %>
+										</div>
+									<% end %>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+			
+		</div>
+	<!-- </main> -->
+</body>

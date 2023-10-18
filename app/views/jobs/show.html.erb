@@ -1,0 +1,109 @@
+
+
+<head>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<style>
+		.indented {
+/*		  padding-left: 50pt;*/
+		  padding-right: 50pt;
+		}
+		.card-subtitle {
+/*		  margin-top: -($card-spacer-y / 2);*/
+		  margin-bottom: 0;
+		}
+		.desc {
+			font-family: 'Poppins', sans-serif;
+		}	
+	</style>
+
+</head>
+
+<div class="container">
+	<div class="container">
+		<div class="card">
+		  <div class="card-header">
+		    <%= @job.job_type.to_s.humanize %>
+		  </div>
+		  <div class="card-body">
+		    <h5 class="card-title"><%= @job.title %></h5>
+		    <h6 class="card-title"><%= @job.company_name %></h6>
+		    <p class="card-subtitle mb-2 text-muted"><i class="material-icons", style="font-size:15px">&#xe55f;</i> <%= @job.location %></p>
+		    
+		    <!-- <a href="<%# job_url(@job) %>" class="btn btn-primary">View Job</a> -->
+		  </div>
+	  	</div>
+	</div>
+
+	<div class="container mt-5">
+		<div class="card">
+		  <div class="card-body">
+		    <h5 class="card-title">Job Skills</h5>
+		    <br>
+		    <div class="container">
+		    <table class="table table-sm align-middle ">
+			    <% @job.skills.all.each do |s| %>
+		    		<tr>
+		    			<td><p class="card-title", style="font-size: px"> <%= s.name %> </p></td>
+						<td><p ><%= button_to "Delete Skill", "/jobs/#{@job.id}/skills/#{s.id}", method: :delete,  data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"  %></p></td>
+					</tr>
+			    	
+		    	<% end %>
+	    	</table>
+	    	</div>
+
+	    	<br>
+	    	<div class="container pl-2">
+		    	<p class="card-subtitle mb-2 ">Want to add more Skill: </p>
+		    </div>
+		      <div class="row p-3 bg-white">
+
+    			<div class="col-md justify-content-center">
+    				<%= form_with model: [ @job, @job.skills.build ] do |form| %>
+
+		    			<%= form.text_field :name, class: "form-control form-control-lg bg-light fs-6", placeholder: "Skill Name" %>
+						<div class="input-group mb-3 mt-2">
+						  <%= form.submit "Save Skill", class: "btn btn-lg btn-primary w-100 fs-6" %>
+						</div>
+	    			<% end %>
+		    	</div>
+		    </div>
+		  </div>
+	  	</div>
+	</div>
+
+	<div class="container mt-5">
+		<div class="card p-3">
+			<div class="card-body">
+				<h5 class="card-title mb-3">Job Details</h5>
+				<div>
+				<p class="card-subtitle mb-2 text-muted"><i style="font-size:18px" class="fa">&#xf0d6;</i> <strong style="font-size: 18px;">&nbsp Pay</strong></p>
+				<div class="container", style="margin: 0px 0px 1rem 2rem;">
+					<span style="display: inline-block;
+	    margin: 0 0.25rem 0 0; color: #2d2d2d;">
+						<div style="background-color: lightgrey; padding: 0.2rem; border-radius: .3rem;">
+							Up to Rs. <%= @job.pay %> per Annum
+						</div>
+					</span>
+				</div>
+
+				<div>
+				<p class="card-subtitle mb-2 text-muted"><i style="font-size:18px" class="fa">&#xf0b1;</i> <strong style="font-size: 18px;">&nbsp Job Type</strong></p>
+				<div class="container", style="margin: 0px 0px 1rem 2rem;">
+					<span style="display: inline-block;
+	    margin: 0 0.25rem 0 0; color: #2d2d2d;">
+						<div style="background-color: lightgrey; padding: 0.2rem; border-radius: .3rem;">
+							<%= @job.job_type.to_s.humanize %>
+						</div>
+					</span>
+				</div>
+			</div>
+
+			<div >
+				<pre class="desc"><%= @job.desc %></pre>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<head>
+  <link rel="stylesheet" href="assets/stylesheets/style.css">
+  <title>Login In | Jobify</title>
+</head>
+
+
+<div class="container d-flex justify-content-center align-items-center min-vh-90">
+  <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+
+<!-- <h2>Log in</h2> -->
+
+  <div class="col-md justify-content-center">
+        <div class="row align-items-center ">
+              <div class="header-text mb-5">
+                   <h2>Log In</h2>
+                   <p>We are happy to see you back.</p>
+              </div>
+
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="mb-3" >
+            <%= f.label :email, class: "basic-url mb-1" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
+          </div>
+
+          <div class="mb-3">
+            <%= f.label :password, class: "basic-url mb-1" %><br />
+            <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Enter your password" %>
+          </div>
+
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+
+          <br>
+
+          <div class="actions">
+            <%= f.submit "Log in", class: "btn btn-lg btn-primary w-100 fs-6" %>
+          </div>
+        <% end %>
+        <br>
+
+        </div>
+     </div>
+
+     <br>
+
+
+
+<%= render "devise/shared/links" %>
+
+</div>
+
+</div>

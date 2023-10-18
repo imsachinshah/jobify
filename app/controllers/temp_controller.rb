@@ -1,0 +1,4 @@
+class TempController < ApplicationController
+
+
+end

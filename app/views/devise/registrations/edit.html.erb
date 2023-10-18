@@ -1,0 +1,59 @@
+<head>
+  <link rel="stylesheet" href="assets/stylesheets/style.css">
+  <title>Edit User | Jobify</title>
+</head>
+
+<div class="container d-flex justify-content-center align-items-center min-vh-90">
+  <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+    <div class="header-text mb-4">
+      <h2>Edit <%= resource_name.to_s.humanize %></h2>
+    </div>
+
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <div class="mb-3">
+        <%= f.label :email, class: "basic-url mb-1" %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+      <div class="">
+        <div class="">
+          
+       </div>
+        <%= f.label :password, class: "basic-url mb-1" %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "New Password" %>
+          <% if @minimum_password_length %>
+             <br />
+             <em><%= @minimum_password_length %> characters minimum</em>
+           <% end %>
+       </div>
+      
+
+      <div class="mb-3">
+        <%= f.label :password_confirmation, class: "basic-url mb-1" %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Confirm Password" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :current_password, class: "basic-url mb-1" %> <i>(Compulsory for Updating Details)</i><br />
+        <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Current Password" %>
+      </div>
+
+      <div class="actions">
+        <%= f.submit "Update", class: "btn btn-lg btn-primary w-100 fs-6" %>
+      </div>
+    <% end %>
+
+    <h3>Delete my account</h3>
+
+    <div>Unhappy? <%= button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: "btn btn-lg btn-primary w-100 fs-6" %></div>
+
+    <%= link_to "Back", :back %>
+  </div>
+</div>
