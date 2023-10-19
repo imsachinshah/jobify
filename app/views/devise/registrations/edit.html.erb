@@ -14,6 +14,19 @@
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="mb-3">
+        <%= f.label :first_name, class: "basic-url mb-1" %><br />
+        <%= f.text_field :first_name, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "First Name" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :last_name, class: "basic-url mb-1" %><br />
+        <%= f.text_field :last_name, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "Last Name" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :phone_no, class: "basic-url mb-1" %><br />
+        <%= f.text_field :phone_no, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "Mobile Number" %>
+      </div>
+
+      <div class="mb-3">
         <%= f.label :email, class: "basic-url mb-1" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
       </div>

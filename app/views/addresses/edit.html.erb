@@ -1,0 +1,40 @@
+<%= form_with model: @address, id: "addEditForm", local: false  do |f| %>
+	<div class="col">
+		<div class="card mb-3 border-0">
+			<h4 style="padding-left: 10px; padding-top: 20px;"> Edit Address</h4>
+			<div class="card-body">
+				<div class="row mb-3">
+					<div class="col-sm-3">
+						<h6 class="mb-0">Street</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						<%= f.text_field :street, class: "form-control" %>
+						<!-- <input type="text" class="form-control" value="John Doe"> -->
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3">
+						<h6 class="mb-0">City</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						<%= f.text_field :city, class: "form-control" %>
+					</div>
+				</div>
+				<div class="row mb-3">
+					<div class="col-sm-3">
+						<h6 class="mb-0">Pincode</h6>
+					</div>
+					<div class="col-sm-9 text-secondary">
+						<%= f.text_field :pincode, class: "form-control" %>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3"></div>
+					<div class="col-sm-9 text-secondary">
+						<%= f.submit "Update", class: "btn btn-primary px-4" %>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

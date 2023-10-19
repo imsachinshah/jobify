@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'educations/new'
+  get 'educations/edit'
+  get 'experiences/new'
+  get 'experiences/edit'
+  # get 'address/new'
   
   # get 'dashboard/index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -25,5 +30,7 @@ Rails.application.routes.draw do
   resources :jobs do
     resources :skills
   end
+
+  resources :addresses
     # resources :skills,:jobs
 end

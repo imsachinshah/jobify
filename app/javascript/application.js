@@ -5,3 +5,13 @@ import "controllers"
 //= require popper
 //= require bootstrap
 
+import * as bootstrap from "bootstrap"
+
+
+
+// document.addEventListener("DOMContentLoaded", function() {
+// 	  // Initialize Bootstrap JavaScript components
+// 	  alert("this is akash");
+// 	  new bootstrap.Modal(document.getElementById('myModal'));
+// });
+

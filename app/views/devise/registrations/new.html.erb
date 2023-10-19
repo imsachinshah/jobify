@@ -31,67 +31,72 @@
                    <p>We are glad you're here.</p>
               </div>
 
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
                 <%= render "devise/shared/error_messages", resource: resource %>
 
-                  <div class="input-group mb-3">
-                      <!-- <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Email address"> -->
-                      <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
-                  </div>
-              <div class="input-group mb-2">
-                  <!-- <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password"> -->
-                  <%# f.label :password %>
+                <div class="input-group mb-3">
+                  <%= f.text_field :first_name, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "First Name" %>
+                </div>
+                <div class="input-group mb-3">
+                  <%= f.text_field :last_name, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "Last Name" %>
+                </div>
+                <div class="input-group mb-3">
+                  <%= f.text_field :phone_no, autofocus: true, class: "form-control form-control-lg bg-light fs-6", placeholder: "Mobile Number" %>
+                </div>
+                <div class="input-group mb-3">
+                    <!-- <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Email address"> -->
+                    <%= f.text_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
+                </div>
+                <div class="input-group mb-2">
 
-                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Password" %> 
+                    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Password" %> 
 
-              </div>
+                </div>
 
-              <div class="basic-url mb-1">
-                  <% if @minimum_password_length %>
-                  <em>(minimum <%= @minimum_password_length %> characters)</em>
-                  <% end %>
-              </div>
+                <div class="basic-url mb-1">
+                    <% if @minimum_password_length %>
+                    <em>(minimum <%= @minimum_password_length %> characters)</em>
+                    <% end %>
+                </div>
 
-              <div class="input-group mb-2">
-                  <!-- <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password"> -->
-                  <%# f.label :password %>
+                <div class="input-group mb-2">
 
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Confirm Password" %> 
-                  
-              </div>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg bg-light fs-6", placeholder: "Confirm Password" %> 
+                    
+                </div>
 
-<!--               <div class="basic-url mb-3">
-                <%# if @minimum_password_length %>
-                  <em>(<%# @minimum_password_length %> characters minimum)</em>
-                <%# end %><br />
-              </div> -->
+  <!--               <div class="basic-url mb-3">
+                  <%# if @minimum_password_length %>
+                    <em>(<%# @minimum_password_length %> characters minimum)</em>
+                  <%# end %><br />
+                </div> -->
 
 
-              <div class="basic-url mb-3">
-                <div class="mt-3">
-                  <%= f.label :Role,class:"form-check-label"%>
-                  <div style="font-size: 15px;">  
-                  <%= f.radio_button :role, "seeker",autofocus:true,class:"form-check-input" %>
-                  <%= f.label :Seeker, "Seeker",class:"form-check-label" %>
-                  &nbsp;
-                  <%= f.radio_button :role, "recruiter",autofocus:true,class:"form-check-input"%>
-                  <%= f.label :Recruiter, "Recruiter",class:"form-check-label"%>
-                  </div>
-                </div> 
-              </div>
+                <div class="basic-url mb-3">
+                  <div class="mt-3">
+                    <%= f.label :Role,class:"form-check-label"%>
+                    <div style="font-size: 15px;">  
+                    <%= f.radio_button :role, "seeker",autofocus:true,class:"form-check-input" %>
+                    <%= f.label :Seeker, "Seeker",class:"form-check-label" %>
+                    &nbsp;
+                    <%= f.radio_button :role, "recruiter",autofocus:true,class:"form-check-input"%>
+                    <%= f.label :Recruiter, "Recruiter",class:"form-check-label"%>
+                    </div>
+                  </div> 
+                </div>
 
-              <div class="input-group mb-5 d-flex justify-content-between">
-                  <div class="form-check">
-                      <input type="checkbox" class="form-check-input" id="formCheck">
-                      <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
-                  </div>
-                  <div class="forgot">
-                      <small><%= link_to "Forgot your password?", new_password_path(resource_name) %></small>
-                  </div>
-              </div>
-              <div class="input-group mb-3">
-                  <%= f.submit "Sign Up", class: "btn btn-lg btn-primary w-100 fs-6" %>
-              </div>
+                <div class="input-group mb-5 d-flex justify-content-between">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="formCheck">
+                        <label for="formCheck" class="form-check-label text-secondary"><small>Remember Me</small></label>
+                    </div>
+                    <div class="forgot">
+                        <small><%= link_to "Forgot your password?", new_password_path(resource_name) %></small>
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <%= f.submit "Sign Up", class: "btn btn-lg btn-primary w-100 fs-6" %>
+                </div>
               <% end %>
               <div class="row">
                   <small>Already have account? <%= link_to "Sign In", new_session_path(resource_name) %></small>
