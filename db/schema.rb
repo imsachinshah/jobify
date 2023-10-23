@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_18_071645) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_091718) do
   create_table "addresses", force: :cascade do |t|
     t.string "street"
     t.string "city"
@@ -19,6 +19,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_071645) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
+  create_table "applied_jobs", force: :cascade do |t|
+    t.integer "status"
+    t.integer "user_id"
+    t.integer "job_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["job_id"], name: "index_applied_jobs_on_job_id"
+    t.index ["user_id"], name: "index_applied_jobs_on_user_id"
   end
 
   create_table "educations", force: :cascade do |t|
@@ -98,6 +108,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_18_071645) do
   end
 
   add_foreign_key "addresses", "users"
+  add_foreign_key "applied_jobs", "jobs"
+  add_foreign_key "applied_jobs", "users"
   add_foreign_key "educations", "users"
   add_foreign_key "experiences", "users"
 end

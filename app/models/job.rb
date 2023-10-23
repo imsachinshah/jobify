@@ -8,4 +8,6 @@ class Job < ApplicationRecord
     scope :filter_by_company, -> (company) { where("company_name LIKE ?", "%#{company}%") }
 
 	enum :job_type, [:internship, :fulltime]
+
+	has_many :applied_jobs
 end

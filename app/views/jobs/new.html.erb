@@ -17,16 +17,13 @@
 
     <div class="col-md justify-content-center">
           <div class="row align-items-center">
-                <div class="header-text mb-3">
-                     <h2>Post a Job</h2>
-                     <p>Fill the Job Details</p>
-                </div>
-
-                  <%# form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-                  <%= render "form", job: @job %>
+            <div class="header-text mb-3">
+                 <h2>Post a Job</h2>
+                 <p>Fill the Job Details</p>
+            </div>
+            <%= render "form", job: @job %>
           </div>
        </div>
   </div>
 </div>
 
-<%# render "devise/shared/links" %>

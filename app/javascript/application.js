@@ -5,7 +5,14 @@ import "controllers"
 //= require popper
 //= require bootstrap
 
-import * as bootstrap from "bootstrap"
+import "popper"
+
+import "bootstrap"
+
+import "jquery3"
+
+
+// import * as bootstrap from "bootstrap"
 
 
 

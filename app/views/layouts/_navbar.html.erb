@@ -10,15 +10,21 @@
 
       </ul>
       <ul class="navbar-nav">
-
         <li class="nav-item">
-          <a class="nav-link" href="#">Find Jobs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About Us</a>
-        </li>
+            <a class="nav-link" href="/jobs">Jobs</a>
+          </li>
+        <% unless user_signed_in? %>
+          <li class="nav-item">
+              <a class="nav-link" href="#">About Us</a>
+          </li>
+        <% end %>
         <li class= "nav-item">
-          <a class="nav-link" href="<%= new_job_url %>">Add Jobs</a>
+          <% if user_signed_in? %>  
+            <% if current_user.recruiter? %>
+              <a class="nav-link" href="<%= new_job_url %>">Add Jobs</a>
+              <a class="nav-link" href="<%= candidates_index_url %>">Candidates</a>
+            <% end %>
+          <% end %>
         </li>
 
         <% if current_user %>

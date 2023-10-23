@@ -1,22 +1,19 @@
 Rails.application.routes.draw do
+  get 'candidates/index'
   get 'educations/new'
   get 'educations/edit'
   get 'experiences/new'
   get 'experiences/edit'
-  # get 'address/new'
-  
-  # get 'dashboard/index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
-  # get "/home", to: "views#index"
-  # root "/home"
   root "home#index"
 
-  devise_for :users, path: "users"
+  devise_for :users, path: "users", controllers: {
+    sessions: 'users/sessions'
+  }
+
 
   get "users/profile", to: 'profile#index'
+  # post "users/profile", to: 'profile#index'
 
   devise_scope :user do
     authenticated :user do
@@ -32,5 +29,7 @@ Rails.application.routes.draw do
   end
 
   resources :addresses
-    # resources :skills,:jobs
+
+  resources :applied_jobs
+
 end

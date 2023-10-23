@@ -12,4 +12,8 @@ class User < ApplicationRecord
 	has_many :skills, as: :skillable
 	has_many :jobs
 
+	has_many :applied_jobs
+
+	validates :email, uniqueness: true
+
 end

@@ -2,9 +2,18 @@ class JobsController < ApplicationController
 
 
   def index
-    @jobs = current_user.jobs
-    @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
-    @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
+    if current_user.seeker?
+      @jobs = Job.all
+      @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
+      @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
+      @jobs = @jobs.filter_by_company(params[:company_name]) if params[:company_name].present?
+      @applied_jobs = AppliedJob.pluck(:job_id)
+    else
+      @jobs = current_user.jobs
+      @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
+      @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
+      @jobs = @jobs.filter_by_company(params[:company_name]) if params[:company_name].present?
+    end
   end
 
   def show
@@ -49,7 +58,6 @@ class JobsController < ApplicationController
 
   private
     def jobs_params
-       # params.require(:job).permit(:title, :desc, :job_type, :no_of_vac, :pay, skills_attributes:[:predefined_skills_id => []])
        params.require(:job).permit(:title, :desc, :job_type, :no_of_vac, :pay, :company_name, :location, :_destroy)
     end
 end

@@ -32,8 +32,6 @@
 		    <h5 class="card-title"><%= @job.title %></h5>
 		    <h6 class="card-title"><%= @job.company_name %></h6>
 		    <p class="card-subtitle mb-2 text-muted"><i class="material-icons", style="font-size:15px">&#xe55f;</i> <%= @job.location %></p>
-		    
-		    <!-- <a href="<%# job_url(@job) %>" class="btn btn-primary">View Job</a> -->
 		  </div>
 	  	</div>
 	</div>
@@ -48,29 +46,33 @@
 			    <% @job.skills.all.each do |s| %>
 		    		<tr>
 		    			<td><p class="card-title", style="font-size: px"> <%= s.name %> </p></td>
-						<td><p ><%= button_to "Delete Skill", "/jobs/#{@job.id}/skills/#{s.id}", method: :delete,  data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"  %></p></td>
-					</tr>
-			    	
+		    			<% if current_user.recruiter? %>
+							<td><p ><%= button_to "Delete Skill", "/jobs/#{@job.id}/skills/#{s.id}", method: :delete,  data: {confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm"  %></p></td>
+						<% end %>
+					</tr>  	
 		    	<% end %>
 	    	</table>
 	    	</div>
 
 	    	<br>
-	    	<div class="container pl-2">
-		    	<p class="card-subtitle mb-2 ">Want to add more Skill: </p>
-		    </div>
-		      <div class="row p-3 bg-white">
+			<% if current_user.recruiter? %>
 
-    			<div class="col-md justify-content-center">
-    				<%= form_with model: [ @job, @job.skills.build ] do |form| %>
+		    	<div class="container pl-2">
+			    	<p class="card-subtitle mb-2 ">Want to add more Skill: </p>
+			    </div>
+			      <div class="row p-3 bg-white">
 
-		    			<%= form.text_field :name, class: "form-control form-control-lg bg-light fs-6", placeholder: "Skill Name" %>
-						<div class="input-group mb-3 mt-2">
-						  <%= form.submit "Save Skill", class: "btn btn-lg btn-primary w-100 fs-6" %>
-						</div>
-	    			<% end %>
-		    	</div>
-		    </div>
+	    			<div class="col-md justify-content-center">
+	    				<%= form_with model: [ @job, @job.skills.build ] do |form| %>
+
+			    			<%= form.text_field :name, class: "form-control form-control-lg bg-light fs-6", placeholder: "Skill Name" %>
+							<div class="input-group mb-3 mt-2">
+							  <%= form.submit "Save Skill", class: "btn btn-lg btn-primary w-100 fs-6" %>
+							</div>
+		    			<% end %>
+			    	</div>
+			    </div>
+		    <% end %>
 		  </div>
 	  	</div>
 	</div>

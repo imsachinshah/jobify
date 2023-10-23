@@ -18,7 +18,7 @@ $(document).on('click', '#open-address-form', function () {
     $(document).on('click', '#open-edit-form', function(){
       $.ajax(
       {
-        url: '<%= edit_address_path(current_user.address.id) %>',
+        url: '/addresses/<%= cookie[:user_id] %>/edit',
         type: 'GET',
         dataType: 'html',
         success: function (data) {
