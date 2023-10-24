@@ -18,17 +18,32 @@
     <%=javascript_include_tag "application", "data-turbolinks-track" => true %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js" integrity="sha512-2rNj2KJ+D8s1ceNasTIex6z4HWyOnEYLVC3FigGOmyQCZc2eBXKgOxQmo3oKLHyfcj53uz4QMsRCWNbLd32Q1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <%#= javascript_include_tag "profile", "data-turbolinks-track" => true %>
+    <style>
+      .custom-toastr{
+        top: 80px;
+        right: 20px;
+      }
+    </style>
 
   </head>
 
   <body>
     <%= yield %>
-     <p class="notice alert-success"><%= notice %></p>
-     <p class="alert alert-error"><%= alert %></p>
-
+    
+    <% if flash.any? %>
+      <script type="text/javascript">
+        toastr.options.positionClass = 'custom-toastr';
+        <% flash.each do |key, value| %>
+          <% type = key.to_s.gsub('alert', 'error').gsub('notice', 'success') %>
+            toastr.<%= type %>('<%= value %>')
+        <% end %>
+      </script>
+    <% end %>
   </body>
 </html>

@@ -4,15 +4,11 @@ class JobsController < ApplicationController
   def index
     if current_user.seeker?
       @jobs = Job.all
-      @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
-      @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
-      @jobs = @jobs.filter_by_company(params[:company_name]) if params[:company_name].present?
-      @applied_jobs = AppliedJob.pluck(:job_id)
+      filters
+      @applied_jobs = AppliedJob.where(user_id: current_user.id).pluck(:job_id)
     else
       @jobs = current_user.jobs
-      @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
-      @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
-      @jobs = @jobs.filter_by_company(params[:company_name]) if params[:company_name].present?
+      filters
     end
   end
 
@@ -54,6 +50,12 @@ class JobsController < ApplicationController
     @job = current_user.jobs.find(params[:id])
     @job.destroy
     redirect_back_or_to({action: :index}) 
+  end
+
+  def filters
+      @jobs = @jobs.filter_by_type(params[:job_type]) if params[:job_type].present?
+      @jobs = @jobs.filter_by_location(params[:location]) if params[:location].present?
+      @jobs = @jobs.filter_by_company(params[:company_name]) if params[:company_name].present?
   end
 
   private

@@ -18,14 +18,17 @@
               <a class="nav-link" href="#">About Us</a>
           </li>
         <% end %>
-        <li class= "nav-item">
-          <% if user_signed_in? %>  
-            <% if current_user.recruiter? %>
+        
+        <% if user_signed_in? %>  
+          <% if current_user.recruiter? %>
+            <li class= "nav-item">
               <a class="nav-link" href="<%= new_job_url %>">Add Jobs</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="<%= candidates_index_url %>">Candidates</a>
-            <% end %>
+            </li>
           <% end %>
-        </li>
+        <% end %>
 
         <% if current_user %>
 	        <% if user_signed_in? %>

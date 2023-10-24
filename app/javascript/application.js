@@ -12,13 +12,3 @@ import "bootstrap"
 import "jquery3"
 
 
-// import * as bootstrap from "bootstrap"
-
-
-
-// document.addEventListener("DOMContentLoaded", function() {
-// 	  // Initialize Bootstrap JavaScript components
-// 	  alert("this is akash");
-// 	  new bootstrap.Modal(document.getElementById('myModal'));
-// });
-
