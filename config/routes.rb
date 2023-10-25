@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   get 'candidates/index'
+  get 'candidates/show'
+  post 'candidates/show'
   get 'educations/new'
   get 'educations/edit'
   get 'experiences/new'

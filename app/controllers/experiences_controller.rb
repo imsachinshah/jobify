@@ -11,7 +11,6 @@ class ExperiencesController < ApplicationController
     if @experience.save
       redirect_to users_profile_path(seeker)
     end
-
   end
 
   def edit

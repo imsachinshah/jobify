@@ -1,14 +1,14 @@
 class CandidatesController < ApplicationController
   def index
     if current_user.recruiter?
-      @jobs = current_user.jobs
       @applied_jobs = AppliedJob.all
-      
-      # @applied_jobs = AppliedJob.where(user_id: current_user.id).pluck(:job_id)
     end
-    # @jobs = Job.find(applied_job.job_id)
-    # @recruiter = @job.user
-    # @seeker = User.find(applied_job.user_id)
-
   end
+
+  def show
+    @candidate = User.find(params[:user_id])
+    @job = Job.find(params[:job_id])
+    @applied_job = AppliedJob.find_by(job_id: params[:job_id])
+  end
+
 end

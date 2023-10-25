@@ -1,25 +1,49 @@
 <%= render "layouts/navbar" %>
 
-<div class="d-flex m-5 pl-4 justify-content-evenly">
+<div class="d-flex row m-5 pl-4 justify-content-evenly">
+	<h3 class="header-text mb-5">Candidates</h3>
 	<table class="table table-hover">
 	  <thead>
 	    <tr>
 	      <th scope="col">#</th>
 	      <th scope="col">Candidate</th>
+	      <th scope="col">Candidate Id</th>
 	      <th scope="col">Job</th>
+	      <th scope="col">Job id</th>
+	      <th scope="col">Action</th>
 	      <th scope="col">Status</th>
 	    </tr>
 	  </thead>
 	  <tbody>
-	  	<% @jobs.each_with_index do |job, index| %>
-		    <tr>
-		      <th scope="row"><%= "#{index+1}" %></th>
-		      <td></td>
-		      <td><%= job.title %></td>
-		      <td></td>
-		    </tr>
+	  	<% @applied_jobs.order(:job_id).each_with_index do |app_job, index| %>
+	  		<% if current_user.id == app_job.job.user_id %>
+			    <tr>
+			      <th scope="row"><%= "#{index+1}" %></th>
+			      <td>
+			      	<ul style="list-style: none;">
+			      		<li><%= "#{app_job.user.first_name} #{app_job.user.last_name}" %></li>
+			      		<li class= "text-muted"><%= app_job.user.bio %></li>
+			      	</ul>
+			      </td>
+			      <td><%= app_job.user.id %></td>
+			      <td><%= app_job.job.title %></td>
+			      <td><%= app_job.job.id %></td>
+			      <td><%= button_to "View Candidate", {controller: "candidates", action: "show", user_id: app_job.user.id, job_id: app_job.job.id, applied_job_id: app_job.id}, class: "btn btn-info" %></td>
+			      <td>
+			      	<%= form_with model: app_job, class: "form" do |f| %>
+			      		<%= f.select :recruiter_status, options_for_select(AppliedJob.recruiter_statuses.map {|key, value| [key.humanize, AppliedJob.recruiter_statuses.key(value)]}, selected: app_job.recruiter_status), {}, {class: "form-select"} %>
+			      	<% end %>
+		      	</td>
+			    </tr>
+		    <% end %>
 	    <% end %>
 	  </tbody>
 	</table>
-
 </div>
+
+<script>
+	$('form select').on('change', function(){
+    $(this).closest('form').submit();
+    toastr.info(`This Person is ${this.value}`);
+	});
+</script>

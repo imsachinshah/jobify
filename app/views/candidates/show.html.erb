@@ -1,0 +1,65 @@
+<%= render "layouts/navbar" %>
+
+<div class="d-flex row m-5 pl-4 justify-content-evenly">
+  <div class="mb-3">
+    <%= link_to("Back", :back, class: "btn btn-outline-dark") %>
+  </div>
+  <div class="card">
+    <div class="d-flex mt-3 p-5 justify-content-between">
+      <div class="mt-3">
+        <h3 class="card-title"><%= "#{@candidate.first_name} #{@candidate.last_name}" %></h3>
+        <p class="text-secondary mb-1"> <%= "#{@candidate.bio}" %></p>
+        <a href="mailto:<%= "#{@candidate.email}" %>" class="text-primary mb-1 "> <%= "#{@candidate.email}" %></a>
+        <% if @candidate.address.present? %>
+          <p class="text-muted font-size-sm"><%= "#{@candidate.address.city}" %></p>
+        <% end %>
+      </div>
+      <div class=""> 
+      <h5 class="text-primary">Select Status for Candidate</h5>
+      <%= form_with model: @applied_job, class: "form" do |f| %>
+        <%= f.select :recruiter_status, options_for_select(AppliedJob.recruiter_statuses.map {|key, value| [key.humanize, AppliedJob.recruiter_statuses.key(value)]}, selected: @applied_job.recruiter_status), {}, {class: "form-select"} %>
+      <% end %>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-subtitle text-center mb-3">Applied for <%= @job.title %> Job Post</h5>
+
+      <div class="card mb-3">
+        <h4 style="padding-left: 10px; padding-top: 20px;"> Experience</h4>
+        <% @candidate.experiences.order(created_at: "desc").each do |ex| %>
+          <div class="card-body p-4">
+            <div class="row">
+              <h5 class="card-title"><%= ex.role %></h5>
+              <h6 class="card-subtitle mb-2"><%= ex.company_name %></h6>
+              <p class="card-subtitle mb-2 text-muted">Experience- <%= ex.year_of_exp %> years</p>
+            </div>
+            <hr>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="card mb-3">
+        <h4 style="padding-left: 10px; padding-top: 20px;"> Education</h4>
+
+        <% @candidate.educations.order(year_of_passing: "desc").each do |e| %>
+        <div class="card-body p-4">
+          <div class="row">
+            <h5 class="card-title"><%= e.institution_name %></h5>
+            <h6 class="card-subtitle mb-2"><%= e.course_name %></h6>
+            <p class="card-subtitle mb-2 text-muted">Passing Date - <%= e.year_of_passing %> </p>
+            <p class="card-subtitle mb-2 text-muted"><em> Grade: <%= "#{e.grade}/10" %> </em></p>
+          </div>
+          <hr>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('form select').on('change', function(){
+    $(this).closest('form').submit();
+    toastr.info(`This Person is ${this.value}`);
+  });
+</script>

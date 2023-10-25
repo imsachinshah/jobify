@@ -15,4 +15,23 @@ class UserMailer < ApplicationMailer
 		@applied_job = applied_job
 		mail(to: @seeker.email, subject: "Successfully applied for the Job")
 	end
+
+	def shortlisted_mail(applied_job)
+		info(applied_job)
+		mail(to: @seeker.email, subject: "Congrats!!! you're shortlisted for the Job")
+	end
+
+	def rejected_mail(applied_job)
+		info(applied_job)
+		mail(to: @seeker.email, subject: "Regarding: Your job you have applied")
+	end
+
+	private
+		def info(applied_job)
+		@job = Job.find(applied_job.job_id)
+		@recruiter = @job.user
+		@seeker = User.find(applied_job.user_id)
+		@applied_job = applied_job
+	end
+
 end
