@@ -8,6 +8,10 @@ class ApplicationController < ActionController::Base
 		devise_parameter_sanitizer.permit(:account_update, keys: [:role, :first_name, :last_name, :phone_no])
 	end
 
+	def after_sign_in_path_for(resources) 
+     jobs_path
+	end
+
 	private 
 		def set_user
 			# cookies[:user_id] = current_user.id || 0 if user.signed_in?

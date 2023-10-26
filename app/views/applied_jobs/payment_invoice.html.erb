@@ -1,0 +1,223 @@
+<head>
+	<title>Job Interview Payment</title>
+	<style>
+		body {
+			font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			text-align: center;
+			color: #777;
+		}
+
+		body h1 {
+			font-weight: 300;
+			margin-bottom: 0px;
+			padding-bottom: 0px;
+			color: #000;
+		}
+
+		body h3 {
+			font-weight: 300;
+			margin-top: 10px;
+			margin-bottom: 20px;
+			font-style: italic;
+			color: #555;
+		}
+
+		body a {
+			color: #06f;
+		}
+
+		.invoice-box {
+			max-width: 800px;
+			margin: auto;
+			padding: 30px;
+			border: 1px solid #eee;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+			font-size: 16px;
+			line-height: 24px;
+			font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+			color: #555;
+		}
+
+		.invoice-box table {
+			width: 100%;
+			line-height: inherit;
+			text-align: left;
+			border-collapse: collapse;
+		}
+
+		.invoice-box table td {
+			padding: 5px;
+			vertical-align: top;
+		}
+
+		.invoice-box table tr td:nth-child(2) {
+			text-align: right;
+		}
+
+		.invoice-box table tr.top table td {
+			padding-bottom: 20px;
+		}
+
+		.invoice-box table tr.top table td.title {
+			font-size: 45px;
+			line-height: 45px;
+			color: #333;
+		}
+
+		.invoice-box table tr.information table td {
+			padding-bottom: 40px;
+		}
+
+		.invoice-box table tr.heading td {
+			background: #eee;
+			border-bottom: 1px solid #ddd;
+			font-weight: bold;
+		}
+
+		.invoice-box table tr.details td {
+			padding-bottom: 20px;
+		}
+
+		.invoice-box table tr.item td {
+			border-bottom: 1px solid #eee;
+		}
+
+		.invoice-box table tr.item.last td {
+			border-bottom: none;
+		}
+
+		.invoice-box table tr.total td:nth-child(2) {
+			border-top: 2px solid #eee;
+			font-weight: bold;
+		}
+
+		@media only screen and (max-width: 600px) {
+			.invoice-box table tr.top table td {
+				width: 100%;
+				display: block;
+				text-align: center;
+			}
+
+			.invoice-box table tr.information table td {
+				width: 100%;
+				display: block;
+				text-align: center;
+			}
+		}
+	</style>
+</head>
+
+<div class="d-flex flex-column m-5 pl-4 justify-content-center align-items-center">
+	<h1>Payment Order for Interview</h1>
+	<h3 class="mb-5">Sechedule your interview to your dream job</h3>
+	<div class="invoice-box">
+		<table>
+			<tr class="top">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td class="title">
+								<h4 class="title">Jobify</h4>
+							</td>
+
+							<td>
+								Invoice #: <%= @shortlisted_job.razorpay_order_id %><br />
+								Created: January 1, 2023<br />
+								Due: February 1, 2023
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="information">
+				<td colspan="2">
+					<table>
+						<tr>
+							<td>
+								Princess Business Park<br />
+								Viay Nagar<br />
+								Indore, M.P 4820001
+							</td>
+
+							<td>
+								Jobify Pvt. Limted<br />
+								Sachin Shah<br />
+								jobify.busi@gmail.com
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+
+			<tr class="heading">
+				<td>Item</td>
+
+				<td>Price</td>
+			</tr>
+
+			<tr class="item">
+				<td>Interview amount for <%= @shortlisted_job.job.title %> at this <%= @shortlisted_job.job.company_name %></td>
+
+				<td><%= @order.amount/100 %></td>
+			</tr>
+
+			<tr class="total">
+				<td></td>
+
+				<td>Total: Rs.<%= @order.amount/100 %></td>
+			</tr>
+
+			<tr class="button mt-2">
+				<td></td>
+				<td>
+					<%= button_to "Pay with Razorpay", "#", method: :post, class: "btn btn-info", id: "rzp-button1" %>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	    "key": "<%= ENV["RAZORPAY_KEY_ID"] %>", 
+	    "amount": "<%= @order.amount %>", 
+	    "currency": "INR",
+	    "name": "Jobify",
+	    "description": "Interview Transaction",
+	    "image": "https://example.com/your_logo",
+	    "order_id": "<%= @order.id %>",
+	    "handler": function (response){
+	        // alert(response.razorpay_payment_id);
+	        // alert(response.razorpay_order_id);
+	        // alert(response.razorpay_signature);
+	        window.location.href = `/payment_success?razorpay_payment_id=${response.razorpay_payment_id}&job_id=<%= @shortlisted_job.id %>`
+	    },
+	    "prefill": {
+	        "name": "<%= "#{current_user.first_name} #{current_user.last_name}" %>",
+	        "email": "<%= current_user.email %>",
+	        "contact": "<%= current_user.phone_no %>"
+	    },
+	    "notes": {
+	        "address": "Razorpay Corporate Office"
+	    },
+	    "theme": {
+	        "color": "#3399cc"
+	    }
+	};
+	var rzp1 = new Razorpay(options);
+	rzp1.on('payment.failed', function (response){
+	        alert(response.error.code);
+	        alert(response.error.description);
+	        alert(response.error.source);
+	        alert(response.error.step);
+	        alert(response.error.reason);
+	        alert(response.error.metadata.order_id);
+	        alert(response.error.metadata.payment_id);
+	});
+	document.getElementById('rzp-button1').onclick = function(e){
+	    rzp1.open();
+	    e.preventDefault();
+	}
+</script>

@@ -1,0 +1,25 @@
+<body>
+	Hello <%= "#{@seeker.first_name}" %>, 
+	<br>
+	Wohhoo!! <br>
+	Your payment is successfull to sechedule your interview.<br>
+
+	Your razorpay payment id is <%= @applied_job.razorpay_payment_id %> <br>
+
+	Now, you can sechedule your interview. <br>
+
+	Job Details are <br>
+
+ 	Job name <%= "#{@job.title}" %> <br>
+
+	Company Name <%= "#{@job.company_name}" %> <br>
+
+	Recruiter Name <%= "#{@recruiter.first_name} #{@recruiter.first_name}" %> <br>
+
+	We wish you for the best.
+
+	<br>
+
+	Thanks, <br>
+	Jobify 
+</body>

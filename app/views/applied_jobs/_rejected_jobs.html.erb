@@ -14,7 +14,10 @@
 						    <%= j.job.job_type.to_s.humanize %>
 						  </div>
 						  <div class="card-body">
-						    <h5 class="card-title"><%= j.job.title %></h5>
+						  	<div class="d-flex justify-content-between align-items-center">
+							    <h5 class="card-title"><%= j.job.title %></h5>
+							    <span class="badge bg-danger" style="font-size: 1rem">Rejected</span>
+						    </div>
 						    <h6 class="card-title"><%= j.job.company_name %></h6>
 						    <p class="card-subtitle mb-2 text-muted"><i class="material-icons", style="font-size:15px">&#xe55f;</i> <%= j.job.location %></p>
 						    <pre class="desc card-subtitle"><%= truncate(j.job.desc.to_s, 200) %></pre>

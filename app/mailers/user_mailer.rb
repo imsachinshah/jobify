@@ -26,12 +26,16 @@ class UserMailer < ApplicationMailer
 		mail(to: @seeker.email, subject: "Regarding: Your job you have applied")
 	end
 
+	def interview_payment_success_mail(applied_job)
+		info(applied_job)
+		mail(to: @seeker.email, subject: "Regarding: Interview secheduling ")
+	end
+
 	private
 		def info(applied_job)
 		@job = Job.find(applied_job.job_id)
 		@recruiter = @job.user
 		@seeker = User.find(applied_job.user_id)
 		@applied_job = applied_job
-	end
-
+		end
 end

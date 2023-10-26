@@ -10,8 +10,11 @@
 			            <div class="fs-3 fw-light text-muted">Don't be Jobless Anymore</div>
 			            <h1 class="display-4 fw-bolder mb-5"><span class="text-blue d-inline">Get Jobs within your Fingertips</span></h1>
 			            <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
+			            	<% if user_signed_in? %>
+			            		<a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="<%= jobs_path %>">Browse Jobs</a>
+		            		<% else %>
 			                <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="<%= new_user_registration_url %>">Sign Up</a>
-			                <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="projects.html">Apply</a>
+		                <% end %>
 			            </div>
 			        </div>
 			    </div>
@@ -28,33 +31,21 @@
 	</header>
 
 	<section class="bg-light py-5">
-		<div class="container px-5", style="background: black;">
+		<div class="container px-5">
 			<div class="row gx-5 justify-content-center">
-				<div class="col-xxl-8">
-					<div class="text-center my-5">
+				<div class="text-center my-5">
+					<h1 class="display-4 fw-bolder mb-5"><span class="text-blue d-inline">Trending Job Categories</span></h1>
+				</div>
 
-						<h1 class="display-4 fw-bolder mb-5"><span class="text-blue d-inline">Trending Job Categories</span></h1>
-					</div>
-
-					<div >
-						<ul class="row gx-5 justify-content-center">
-							<li>
-								C++ 
-							</li>
-							<li>
-								Java
-							</li>
-							<li>
-								Ruby On Rails
-							</li>
-							<li>
-								Android
-							</li>
-							<li>
-								DevOps
-							</li>
-						</ul>
-					</div>
+				<div class="container">
+					<div class="d-flex flex-xl-wrap justify-content-center" >
+						<% ["Ruby", "C++", "Front-End", "Back-end", "React", "Graphic", "DevOps"].each do |i| %>
+							<div class="card text-dark bg-light m-5" >
+							  <div class="card-body">
+							    <h4 class="card-title"><%= i %></h4>
+							  </div>
+							</div>
+						<% end %>
 				</div>
 			</div>
 		</div>
@@ -79,12 +70,6 @@
         </div>
     </section>
 </main>
-
-<div style="background: #ffff;">
-	<!-- <img src="app/assets/images/home.png" alt="hh", height="200vh", width="200wh"> -->
-	<%# image_tag("home_page_banner.svg", width: "100%", class: "banner") %>
-</div>
-
 
 <div>
 	

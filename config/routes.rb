@@ -34,4 +34,9 @@ Rails.application.routes.draw do
 
   resources :applied_jobs
 
+  get 'payment-invoice', to: 'applied_jobs#payment_invoice'
+  post 'payment-invoice', to: 'applied_jobs#payment_invoice'
+  get 'payment_success', to: 'applied_jobs#payment_success'
+  post 'payment_success', to: 'applied_jobs#payment_success'
+
 end
