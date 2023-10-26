@@ -1,5 +1,11 @@
 class AppliedJobsController < ApplicationController
 
+	def index
+		@applied_jobs = current_user.applied_jobs
+		@shortlisted_jobs = @applied_jobs.shortlisted
+		@rejected_jobs = @applied_jobs.rejected
+	end
+
 	def create
 		@applied_job = current_user.applied_jobs.new(job_id: params[:job_id])
 		if @applied_job.save
@@ -18,7 +24,7 @@ class AppliedJobsController < ApplicationController
 		@applied_job = AppliedJob.find(params[:id])
     @applied_job.update(applied_job_params)	
     applied_job = @applied_job
-    
+
     if @applied_job.shortlisted?
     	UserMailer.shortlisted_mail(applied_job).deliver_later
     else

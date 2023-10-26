@@ -35,7 +35,7 @@
 							    <h5 class="card-title"><%= j.title %></h5>
 							    <h6 class="card-title"><%= j.company_name %></h6>
 							    <p class="card-subtitle mb-2 text-muted"><i class="material-icons", style="font-size:15px">&#xe55f;</i> <%= j.location %></p>
-							    <pre class="desc card-subtitle"><%= j.desc %></pre>
+							    <pre class="desc card-subtitle"><%= truncate(j.desc.to_s, 200) %></pre>
 							    <br>
 							    <div class="container", style="display: flex">				   
 							    	<a href="<%= job_url(j) %>" class="btn btn-primary">View Job</a> &nbsp;
@@ -43,11 +43,7 @@
 								    	<a href="<%= edit_job_url(j) %>" class="btn btn-warning">Edit Job</a> &nbsp;
 								    	<%= button_to "Delete Job", job_url(j), data: {confirm: "Are you Sure", "turbo_confirm": "Are you sure?"},  method: :delete, class: "btn btn-danger"  %>
 							    	<% else %>
-							    		<%# current_user.applied_jobs.each do |aj| %>
-							    		<%# if aj.job_id == j.id %>
 							    		<%= button_to "Apply Job", applied_jobs_path(job_id: j.id), method: :post, class: "btn btn-warning", id: "apply#{j.id}" %>
-							    		<%# end %>
-							    		<%# end %>
 							    	<% end %>
 							    </div>
 							  </div>
@@ -56,11 +52,10 @@
 							  </div>
 				  	</div>
 				  </div>
-				<% end %>
+					<% end %>
 			<% else %>
 				<div class="addJob m-5">
 					<div class="card text-center">
-					  <!-- <h5 class="card-header">Featured</h5> -->
 					  <div class="card-body">
 					    <h5 class="card-title text-center">Jobs</h5>
 					    <p class="card-text text-center">You didn't have posted any jobs</p>

@@ -17,7 +17,7 @@
       <div class=""> 
       <h5 class="text-primary">Select Status for Candidate</h5>
       <%= form_with model: @applied_job, class: "form" do |f| %>
-        <%= f.select :recruiter_status, options_for_select(AppliedJob.recruiter_statuses.map {|key, value| [key.humanize, AppliedJob.recruiter_statuses.key(value)]}, selected: @applied_job.recruiter_status), {}, {class: "form-select"} %>
+        <%= f.select :recruiter_status, options_for_select(AppliedJob.recruiter_statuses.map {|key, value| [key.humanize, AppliedJob.recruiter_statuses.key(value)]}, @applied_job.recruiter_status), {}, { class: "form-select"} %>
       <% end %>
       </div>
     </div>

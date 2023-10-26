@@ -1,0 +1,1 @@
+order = Razorpay::Order.create amount: 10000, currency: 'INR', receipt: 'TEST'
