@@ -27,6 +27,18 @@
       </div>
 
       <div class="mb-3">
+        <%= f.label :profile_picture, class: "basic-url mb-1" %><br />
+        <%= f.file_field :profile_picture, autofocus: true, class: "form-control form-control-lg bg-light fs-6" %>
+      </div>
+
+      <% if resource.seeker? %>
+        <div class="mb-3">
+          <%= f.label :resume, class: "basic-url mb-1" %><br />
+          <%= f.file_field :resume, autofocus: true, class: "form-control form-control-lg bg-light fs-6" %>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
         <%= f.label :email, class: "basic-url mb-1" %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg bg-light fs-6", placeholder: "Email address" %>
       </div>

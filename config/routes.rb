@@ -10,17 +10,17 @@ Rails.application.routes.draw do
   root "home#index"
 
   devise_for :users, path: "users", controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
+    registrations: 'users/registrations'
   }
 
 
   get "users/profile", to: 'profile#index'
-  # post "users/profile", to: 'profile#index'
+  post "users/profile", to: 'profile#index'
 
   devise_scope :user do
     authenticated :user do
       namespace :users do
-        # resources :jobs
         get "/home/index", as: :authenticated_root
       end
     end

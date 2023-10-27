@@ -86,3 +86,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem "pry", "~> 0.14.2"
 
 gem 'razorpay'
+
+gem "image_processing"
+
+gem "poppler"

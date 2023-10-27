@@ -14,6 +14,9 @@ class User < ApplicationRecord
 
 	has_many :applied_jobs
 
+	has_one_attached :profile_picture
+	has_one_attached :resume
+
 	validates :email, uniqueness: true
 
 end

@@ -4,12 +4,12 @@ class ApplicationController < ActionController::Base
 	before_action :set_user
 
 	def configure_permitted_parameters
-		devise_parameter_sanitizer.permit(:sign_up, keys: [:role, :first_name, :last_name, :phone_no])
-		devise_parameter_sanitizer.permit(:account_update, keys: [:role, :first_name, :last_name, :phone_no])
+		devise_parameter_sanitizer.permit(:sign_up, keys: [:role, :first_name, :last_name, :phone_no, :profile_picture])
+		devise_parameter_sanitizer.permit(:account_update, keys: [:role, :first_name, :last_name, :phone_no, :resume])
 	end
 
 	def after_sign_in_path_for(resources) 
-     jobs_path
+    jobs_path
 	end
 
 	private 
