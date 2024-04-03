@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
+
   get 'candidates/index'
   get 'candidates/show'
   post 'candidates/show'
   get 'educations/new'
   get 'educations/edit'
-  get 'experiences/new'
-  get 'experiences/edit'
 
   root "home#index"
 
@@ -31,6 +30,7 @@ Rails.application.routes.draw do
   end
 
   resources :addresses
+  resources :experiences
 
   resources :applied_jobs
 

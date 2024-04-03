@@ -4,13 +4,18 @@ class AddressesController < ApplicationController
   #   @address = seeker.address.new
   # end
 
-  def create
-    seeker = current_user if current_user.seeker?
-    @address = seeker.address.create(address_params)
-    redirect_to users_profile_path(current_user)
+  def new
+    @address = Address.new
   end
 
-  def new 
+  def create
+    @seeker = current_user if current_user.seeker?
+    @address = @seeker.create_address(address_params)
+    if @address.save
+      redirect_to users_profile_path(current_user)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit

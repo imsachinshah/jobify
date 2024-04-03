@@ -1,2 +1,0 @@
-class Temp < ApplicationRecord
-end

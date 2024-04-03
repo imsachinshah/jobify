@@ -5,6 +5,7 @@ class ExperiencesController < ApplicationController
   end
 
   def  create
+    
     seeker = current_user if current_user.seeker?
     @experience = seeker.experiences.new(exp_params)
 

@@ -32,6 +32,16 @@
 			  	</div>
 			  </div>
 			<% end %>
+		<% else %>
+			<div class="addJob m-5">
+				<div class="card text-center">
+				  <div class="card-body">
+				    <h5 class="card-title text-center">Applied Jobs</h5>
+				    <p class="card-text text-center">You didn't have applied to any jobs</p>
+				    <a href="<%= jobs_url %>" class="btn btn-primary", style= "">Check out Jobs </a>
+				  </div>
+				</div>
+			</div>
 		<% end %>
 	</div>
 </div>

@@ -77,8 +77,6 @@ gem "bootstrap", "~> 5.3"
 
 gem "jquery-rails", "~> 4.6"
 
-# gem "popper", "~> 0.5.3"
-
 gem "popper_js", "~> 2.11"
 
 gem 'dotenv-rails', groups: [:development, :test]

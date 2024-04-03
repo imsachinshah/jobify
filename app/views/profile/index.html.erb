@@ -156,7 +156,7 @@
                           <h6 class="card-subtitle mb-2"><%= ex.company_name %></h6>
                           <p class="card-subtitle mb-2 text-muted">Experience- <%= ex.year_of_exp %> years</p>
                           <div class="col-sm-12">
-                              <a class="btn btn-info " target="__blank" href="">Edit Experience</a>
+                              <a class="btn btn-info " target="" href="">Edit Experience</a>
                           </div>
                         </div>
                         <hr>
@@ -170,7 +170,7 @@
                         
                     <div class="d-flex justify-content-end">
                       <div class="m-2">
-                        <a class="btn btn-info" target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Add more Education</a>
+                        <a class="btn btn-info" target="" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Add more Education</a>
                       </div>
                     </div>
 
@@ -182,7 +182,7 @@
                         <p class="card-subtitle mb-2 text-muted">Passing Date - <%= e.year_of_passing %> </p>
                         <p class="card-subtitle mb-2 text-muted"><em> Grade: <%= "#{e.grade}/10" %> </em></p>
                         <div class="col-sm-12">
-                          <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit Education</a>
+                          <a class="btn btn-info " target="" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit Education</a>
                         </div>
                       </div>
                       <hr>
@@ -214,7 +214,42 @@
       </div>
     </div>
 
-  <script src="<%= asset_path 'profile.js' %>"></script>
-    <!-- </div> -->
+  <script>
+    $(document).on('click', '#open-address-form', function () {
+      $.ajax({
+        url: '<%= new_address_path(@user) %>',
+        type: 'GET',
+        dataType: 'html',
+        success: function (data) {
+          $('#address-form-container').html(data);
+        },
+        error: function () {
+          alert('An error occurred while loading the review form.');
+        }
+      });
+    });
+    $(document).on('click', '#cancel', function () {
+         $('#address-form-container').html("");
+    });
+
+    $(document).on('click', '#open-edit-form', function(){
+      $.ajax(
+      {
+        url: '/addresses/<%= current_user.id %>/edit',
+        type: 'GET',
+        dataType: 'html',
+        success: function (data) {
+          $('.showAddress').hide();
+          $('#addHead').hide();
+          $('.editAddress').html(data);
+          $('#open-edit-form').hide();
+        },
+        error: function (){
+          alert('Error occurs in editing')
+        }
+      })
+    })
+  </script>
+
   </main>
 

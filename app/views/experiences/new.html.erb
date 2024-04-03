@@ -1,29 +1,67 @@
-<h1>Experiences#new</h1>
-<p>Find me in app/views/experiences/new.html.erb</p>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" id= "myInput">
-  Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+<%= form_with model: exp, id:'expForm' do |f| %>
+  <div class="col">
+    <div class="card mb-3 border-0">
+      <!-- <h4 style="padding-left: 10px; padding-top: 20px;"> New Address</h4> -->
+      <div class="card-body">
+        <div class="row mb-3">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Job Role</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= f.text_field :role, class: "form-control" %>
+          </div>
+          <div style="color: red">
+            <% if item.errors.include?(:role) %>
+                <% item.errors.full_messages_for(:role).each do |error_message| %>
+                  <%= error_message %>.
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Company Name</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= f.text_field :company_name, class: "form-control" %>
+          </div>
+          <div style="color: red">
+            <% if item.errors.include?(:company_name) %>
+                <% item.errors.full_messages_for(:company_name).each do |error_message| %>
+                  <%= error_message %>.
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <div class="col-sm-3">
+            <h6 class="mb-0">Year of Experience</h6>
+          </div>
+          <div class="col-sm-9 text-secondary">
+            <%= f.number_field :year_of_exp, class: "form-control" %>
+          </div>
+          <div style="color: red">
+            <% if item.errors.include?(:year_of_exp) %>
+                <% item.errors.full_messages_for(:year_of_exp).each do |error_message| %>
+                  <%= error_message %>.
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3"></div>
+          <div class="col-sm-9 text-secondary">
+            <%= f.submit "Save", class: "btn btn-primary px-4" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
+
+
+
+
 
 
 

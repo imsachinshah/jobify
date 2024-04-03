@@ -35,6 +35,15 @@
 			  	</div>
 			  </div>
 			<% end %>
+		<% else %>
+			<div class="addJob m-5">
+				<div class="card text-center">
+				  <div class="card-body">
+				    <p class="card-text text-center">You didn't have shortlisted in any jobs</p>
+				    <a href="<%= jobs_url %>" class="btn btn-primary", style= "">Apply to Jobs Here </a>
+				  </div>
+				</div>
+			</div>
 		<% end %>
 	</div>
 </div>
